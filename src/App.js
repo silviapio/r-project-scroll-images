@@ -38,9 +38,16 @@ const App = () => {
     }
   }
 
+  const handleRemove = i => {
+    const newPhotos = [...photos];
+    newPhotos.splice(i,1);
+    setPhotos(newPhotos);
+  }
+
   return (
     <div className="container">
       <h1>Scroll down to load more photos...</h1>
+      <p>(or click on the ones you wish to delete)</p>
       <Grid fluid>
         <Row center="md">
           {count !== 0 && photos.map((photo, i) => (
@@ -49,6 +56,7 @@ const App = () => {
                 src={photo.url}
                 alt={photo.title}
                 className="img-fluid"
+                onClick={()=>handleRemove(i)}
               />
             </Col>
           ))}
