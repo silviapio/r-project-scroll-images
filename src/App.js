@@ -2,7 +2,6 @@ import { useEffect, useState } from "react";
 import axios from "axios";
 import { InView } from "react-intersection-observer";
 import { Grid, Row, Col } from "react-flexbox-grid";
-import logo from './logo.svg';
 import './App.css';
 
 const App = () => {
@@ -14,7 +13,7 @@ const App = () => {
   
   useEffect(() => {
     getPhotos(0);
-    setIncrement(4)
+    setIncrement(4);
     // eslint-disable-next-line
   }, []);
 
@@ -43,26 +42,27 @@ const App = () => {
     <div className="container">
       <h1>Scroll down to load more photos...</h1>
       <Grid fluid>
-        <Row>
+        <Row center="md">
           {count !== 0 && photos.map((photo, i) => (
             <Col key={i} xs={6} md={4} lg={3}>
-              <img 
-                src={photo.url} 
+              <img
+                src={photo.url}
                 alt={photo.title}
                 className="img-fluid"
               />
             </Col>
           ))}
         </Row>
+        {isLoading && <Row style={{ minHeight: "30vh" }} />}
       </Grid>
-      {(count !== 0 && !isLoading) && 
-        <InView 
-          as="div" 
-          onChange={handleLoaderVisible}>
-        <h2>Loading more...</h2>
-      </InView>}
+      {(count !== 0 && !isLoading) &&
+        <InView
+          as="div"
+          onChange={handleLoaderVisible}
+        >
+          <h2>Loading more...</h2>
+        </InView>}
     </div>
-
   );
 }
 
